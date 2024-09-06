@@ -12,7 +12,7 @@ import java.awt.Point;
 public class BocchiEternel extends JDialog implements ActionListener
 {
     private static int vitesse = 6; //vitesse de déplacement
-    private static int temps = (int)(Math.random() * 4000) + 1000; //temps d'apparition'
+    private static int temps = (int)(Math.random() * 4000) + 1000; //temps d'apparition
     
     private PanelStarry panel;
     private int posX;
@@ -60,10 +60,9 @@ public class BocchiEternel extends JDialog implements ActionListener
 		
 		this.survie = 0;
 		
+		//lancer le déplacement
 		timer = new Timer(20, this);
-		
 		timer.start();
-		//timer.stop();
 	}
 
 	public void setPos(int x, int y)
@@ -100,7 +99,7 @@ public class BocchiEternel extends JDialog implements ActionListener
 			System.out.println("DEAD");
 			this.dispose();
 			timer.stop();
-			//deconnexion()
+			deconnexion();
 		}
 		
 		this.setLocation(this.posX, this.posY);
@@ -118,7 +117,7 @@ public class BocchiEternel extends JDialog implements ActionListener
 	public void deconnexion()
     {
         try {
-            // Exécute la commande
+            // Changer le chemin ici
             Process process = Runtime.getRuntime().exec("mate-terminal -e \"/home/etudiant/sm220306/MesJeux/BocchiEternel/test.sh\"");
 
             // Attend que la commande se termine
@@ -134,15 +133,17 @@ public class BocchiEternel extends JDialog implements ActionListener
 
     public static void main(String[] args) 
     {
-//    	try
-//    	{
-//    		int dodo = (int)(Math.random() * 60) * 1000;
-//    		System.out.println(dodo);
-//    		Thread.sleep( dodo );
-//    		
-//    	}catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    	try
+    	{
+    		int dodo = (int)(Math.random() * 60); //minute
+    		System.out.println(dodo);
+    		dodo = dodo * 60000; //milisecondes
+    		
+    		Thread.sleep( dodo );
+    		
+    	}catch (Exception e) {
+            e.printStackTrace();
+        }
     	
     	new BocchiEternel("BlobBocchi", 50);
     }
